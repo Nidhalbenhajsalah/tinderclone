@@ -1,0 +1,99 @@
+.login{
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+margin-top: 10vh;
+}
+
+h1{
+font-size: 2em;
+margin-bottom: 2rem;
+text-align: center;
+padding: 0.5em;
+color: gray;
+}
+
+.wrapper{
+    display: flex;
+    padding: 2vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70vw;
+    -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 19px 11px 8px rgba(0,0,0,0.21); 
+    box-shadow: 0px 10px 13px -7px #000000, 5px 19px 11px 8px rgba(0,0,0,0.21);
+    border-radius: 10px;
+}
+
+.right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.center{
+    display: flex;
+    flex-direction: column;
+    margin: 1.5vh;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.or{
+    padding: 10px;
+    color: gray;
+    background-color: white;
+    font-weight: bold;
+}
+
+.line{
+    width: 40vw;
+    height: 0.1rem;
+    background-color: rgb(221, 214, 214);
+    position: absolute;
+    border-radius: 20%;
+    z-index: -1;
+
+}
+
+.loginButton{
+    width: 150px;
+    font-size: large;
+    font-weight: bold;
+    padding: 15px 25px;
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    cursor: pointer;
+}
+.google{
+    background-color: #df4930;
+    margin-bottom: 1.5vh;
+}
+
+.facebook{
+    background-color: #507cc0;
+}
+
+input{
+    width: 200px;
+    padding: 15px 20px;
+    margin-bottom: 1.5vh;
+}
+
+.submit{
+    width: 100px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    background-color: #507cc0;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    font-size: large;
+    font-weight: bold;
+}
