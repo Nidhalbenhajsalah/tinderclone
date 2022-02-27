@@ -1,24 +1,32 @@
 import * as React from 'react'
+import { useEffect, useState } from 'react'
 import PersonIcon from '@material-ui/icons/Person';
 import { IconButton } from '@material-ui/core';
 import ForumIcon from '@material-ui/icons/Forum';
 // import Avatar from '@mui/material/Avatar';
 import { Link } from 'react-router-dom';
+import Profile from '../../pages/profile/profile';
 
 
 import './Header.css'
+import axios from 'axios';
 
-function Header({ user }) {
+function Header({ id }) {
+
+
 
     const logout = () => {
         window.open('http://localhost:8001/auth/logout', '_self');
-
     }
+
+
+
+
     return (
         <div className='header'>
             <Link to='/profile'>
                 <IconButton>
-                    <img src={user.photos[0].value} fontSize='large' alt='avatar' className='avatar' />
+                    <PersonIcon />
                 </IconButton>
             </Link>
             <img
@@ -30,6 +38,8 @@ function Header({ user }) {
                 <ForumIcon fontSize='large' className='header__icon' />
             </IconButton>
         </div>
+
+
     )
 }
 

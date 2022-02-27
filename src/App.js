@@ -4,10 +4,14 @@ import Login from './pages/Login/Login.js';
 import Home from './pages/Home/Home.js';
 import Profile from './pages/profile/profile';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+
+
+
 
 function App() {
   const [user, setUser] = useState(null);
+  const [id, setId] = useState(null);
 
   useEffect(() => {
     const getUser = async () => {
@@ -26,22 +30,26 @@ function App() {
         throw new Error('Something went wrong');
       }).then(resObject => {
         setUser(resObject.user);
+        setId(resObject.user.googleId);
+
       }).catch(err => {
         console.log(err);
       });
     }
     getUser();
   }, []);
+  console.log('user from App.js', user);
 
-  console.log(user);
+
+
 
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/" element={user ? <Home user={user} /> : <Navigate to='login' />} />
+          <Route path="/" element={user ? <Home user={user} id={id} /> : <Navigate to='login' />} />
           <Route path="/login" element={user ? <Navigate to='/' /> : <Login />} />
-          <Route path="/profile" element={user ? <Profile user={user} /> : <Navigate to='login' />} />
+          <Route path="/profile" element={user ? <Profile user={user} id={id} /> : <Navigate to='login' />} />
         </Routes>
       </div>
     </BrowserRouter >

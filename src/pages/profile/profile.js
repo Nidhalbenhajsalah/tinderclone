@@ -1,9 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { IconButton } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import './profile.css';
 
-const Profile = ({ user }) => {
+
+
+
+const Profile = ({ id }) => {
+
+    const [dbUser, setDbUser] = useState(null);
+
+    useEffect(() => {
+        const getDbUser = async () => {
+            const response = await axios.get(`http://localhost:8001/user/findById/${id}`);
+            setDbUser(response.data);
+        }
+        getDbUser();
+    }, [id])
+
+    const firstName = dbUser ? dbUser.firstName : '';
+    const image = dbUser ? dbUser.Image : '';
+
+
+
+
     return (
         <div className='profile'>
 
@@ -13,10 +34,10 @@ const Profile = ({ user }) => {
                 </Link>
             </div>
             <div className='main_avatar'>
-                <img src={user.photos[0].value} alt='avatar'
+                <img src={image} alt='avatar'
                     className='img' />
                 <div className='profile__info'>
-                    <h1>{user.name.givenName}</h1>
+                    <h1>{firstName}</h1>
                 </div>
             </div>
             <div className='profile__options'>

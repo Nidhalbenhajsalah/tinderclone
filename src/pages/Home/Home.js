@@ -1,15 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../../components/Header/Header'
 import TinderCards from '../../components/TinderCards/TinderCards'
 import SwipeButtons from '../../components/Swipe-buttons/SwipeButtons'
+import axios from 'axios';
 
-const Home = ({ user }) => {
+
+const Home = ({ id }) => {
+
+
+
+
+
     return (
         <div>
-            <Header user={user} />
+            <Header />
             <TinderCards />
             <SwipeButtons />
-        </div>
+        </div >
     )
 }
 
