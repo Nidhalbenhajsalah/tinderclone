@@ -26,7 +26,8 @@ function Header({ id }) {
         <div className='header'>
             <Link to='/profile'>
                 <IconButton>
-                    <PersonIcon />
+                    <PersonIcon className='header__icon'
+                        fontSize='large' />
                 </IconButton>
             </Link>
             <img
