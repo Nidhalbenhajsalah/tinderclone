@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 10vh;
+    margin-bottom: 5vh;
     border: 1px solid #e6e6e6;
 }
 
@@ -35,16 +35,40 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+    margin-left: 5%;
+    margin-right: 5%;
+
+}
+.photos{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1vw;
+    margin-bottom: 2vh;
+   
 }
 
+.photo_container{
+    height: 20vh;
+    width: 12vh;
+    background-image: url('https://static.remove.bg/remove-bg-web/59c96072ccf69a79c0e6dd85a2eac05ceb4d0784/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png');
+    background-size: cover;
+    border-radius: 10px;
+}
+
+.add{
+    font-size: 2.5vh;
+    color:rgb(228, 11, 120)
+}
+
+
+
 .field{
-    display: flex;
+   display: flex;
     flex-direction: row;
+    align-items: center;
+    width: 80%;
     border: 1px solid #e6e6e6;
     max-height: 100%;
-    width: 65%;
-    justify-content: flex-start;
-    align-items: center;
     font-size: 2vh;
     color: gray;
     margin-bottom: 2vh;
@@ -53,12 +77,12 @@
 
 .item_text{
     font-weight: bolder;
-    font-size: 2.5vh;
+    font-size: 2vh;
     margin-left: 2vw;
 }
 
 .field_title{
-    font-size: 2.5vh;
+    font-size: 2vh;
     margin-left: 5%;
     width: 35%;
     
