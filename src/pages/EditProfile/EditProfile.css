@@ -50,7 +50,7 @@
 .photo_container{
     height: 20vh;
     width: 12vh;
-    background-image: url('https://static.remove.bg/remove-bg-web/59c96072ccf69a79c0e6dd85a2eac05ceb4d0784/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png');
+    /* background-image: url('https://static.remove.bg/remove-bg-web/59c96072ccf69a79c0e6dd85a2eac05ceb4d0784/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png'); */
     background-size: cover;
     border-radius: 10px;
 }
