@@ -14,7 +14,7 @@ export const EditProfile = ({ handleShowEditProfile, dbUser }) => {
     const [previewSource, setPreviewSource] = useState();
     const [photos, setPhotos] = useState([]);
     const [index, setIndex] = useState();
-    const [photoUrl, setPhotoUrl] = useState();
+
 
 
 
@@ -86,6 +86,7 @@ export const EditProfile = ({ handleShowEditProfile, dbUser }) => {
                 });
                 if (isMounted) return
                 setPhotos(response.data.photos);
+                // console.log(response.data.photos[0]._id);
             } catch (error) {
                 console.log(error);
             }
@@ -112,127 +113,26 @@ export const EditProfile = ({ handleShowEditProfile, dbUser }) => {
             </div>
             <div className='body'>
                 <div className='photos'>
-                    <div className='photo_container'
-                        style={{ backgroundImage: `url(${photos[0]})` }}
-                    >
-                        {!photos[0] ?
-                            <IconButton onClick={handleClick}>
-                                <i id='0' className="fa-solid fa-circle-plus add" onClick={handleId}>
-                                </i>
-                            </IconButton>
-                            :
-                            <IconButton onClick={handleDelete} >
-                                <i id='0' className="fa-solid fa-circle-minus add" onClick={handleId} >
-                                </i>
-                            </IconButton>
-                        }
-                    </div>
-                    <div className='photo_container'
-                        style={{ backgroundImage: `url(${photos[1]})` }}
-                    >
-                        {!photos[1] ?
-                            <IconButton onClick={handleClick}>
-                                <i id='1' className="fa-solid fa-circle-plus add" onClick={handleId}></i>
-                            </IconButton>
-                            :
-                            <IconButton onClick={handleDelete}>
-                                <i id='1' className="fa-solid fa-circle-minus add" onClick={handleId}></i>
-                            </IconButton>
-                        }
-                    </div>
-                    <div className='photo_container'
-                        style={{ backgroundImage: `url(${photos[2]})` }}
-                    >
-                        {!photos[2] ?
-                            <IconButton onClick={handleClick}>
-                                <i id='2' className="fa-solid fa-circle-plus add" onClick={handleId}></i>
-                            </IconButton>
-                            :
-                            <IconButton onClick={handleDelete}>
-                                <i id='2' className="fa-solid fa-circle-minus add" onClick={handleId}></i>
-                            </IconButton>
-                        }
-                    </div>
-                    <div className='photo_container'
-                        style={{ backgroundImage: `url(${photos[3]})` }}
-                    >
-                        {!photos[3] ?
-                            <IconButton onClick={handleClick}>
-                                <i id='3' className="fa-solid fa-circle-plus add" onClick={handleId}></i>
-                            </IconButton>
-                            :
-                            <IconButton onClick={handleDelete}>
-                                <i id='3' className="fa-solid fa-circle-minus add" onClick={handleId}></i>
-                            </IconButton>
-                        }
-                    </div>
-                    <div className='photo_container'
-                        style={{ backgroundImage: `url(${photos[4]})` }}
-                    >
-                        {!photos[4] ?
-                            <IconButton onClick={handleClick}>
-                                <i id='4' className="fa-solid fa-circle-plus add" onClick={handleId}></i>
-                            </IconButton>
-                            :
-                            <IconButton onClick={handleDelete}>
-                                <i id='4' className="fa-solid fa-circle-minus add" onClick={handleId}></i>
-                            </IconButton>
-                        }
-                    </div>
-                    <div className='photo_container'
-                        style={{ backgroundImage: `url(${photos[5]})` }}
-                    >
-                        {!photos[5] ?
-                            <IconButton onClick={handleClick}>
-                                <i id='5' className="fa-solid fa-circle-plus add" onClick={handleId}></i>
-                            </IconButton>
-                            :
-                            <IconButton onClick={handleDelete}>
-                                <i id='5' className="fa-solid fa-circle-minus add" onClick={handleId}></i>
-                            </IconButton>
-                        }
-                    </div>
-                    <div className='photo_container'
-                        style={{ backgroundImage: `url(${photos[6]})` }}
-                    >
-                        {!photos[6] ?
-                            <IconButton onClick={handleClick}>
-                                <i id='6' className="fa-solid fa-circle-plus add" onClick={handleId}></i>
-                            </IconButton>
-                            :
-                            <IconButton onClick={handleDelete}>
-                                <i id='6' className="fa-solid fa-circle-minus add" onClick={handleId}></i>
-                            </IconButton>
-                        }
-                    </div>
-                    <div className='photo_container'
-                        style={{ backgroundImage: `url(${photos[7]})` }}
-                    >
-                        {!photos[7] ?
-                            <IconButton onClick={handleClick}>
-                                <i id='7' className="fa-solid fa-circle-plus add" onClick={handleId}></i>
-                            </IconButton>
-                            :
-                            <IconButton onClick={handleDelete}>
-                                <i id='7' className="fa-solid fa-circle-minus add" onClick={handleId}></i>
-                            </IconButton>
-                        }
-                    </div>
-                    <div className='photo_container'
-                        style={{ backgroundImage: `url(${photos[8]})` }}
-                    >
-                        {!photos[8] ?
-                            <IconButton onClick={handleClick}>
-                                <i id='8' className="fa-solid fa-circle-plus add" onClick={handleId}></i>
-                            </IconButton>
-                            :
-                            <IconButton onClick={handleDelete}>
-                                <i id='8' className="fa-solid fa-circle-minus add" onClick={handleId} ></i>
-                            </IconButton>
-                        }
-                    </div>
-
+                    {
+                        photos?.map((photo, index) => (
+                            <div className='photo_container'
+                                key={photo._id}
+                                style={{ backgroundImage: `url(${photo.url})` }}
+                            >
+                                {photo.url === '' ?
+                                    <IconButton onClick={handleClick}>
+                                        <i id={index} className="fa-solid fa-circle-plus add" onClick={handleId}></i>
+                                    </IconButton>
+                                    :
+                                    <IconButton onClick={handleDelete}>
+                                        <i id={index} className="fa-solid fa-circle-minus add" onClick={handleId}></i>
+                                    </IconButton>
+                                }
+                            </div>
+                        ))
+                    }
                 </div>
+
 
                 <div className='field'>
                     <span className='field_title'>First Name </span>
