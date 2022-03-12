@@ -1,0 +1,56 @@
+
+.chat__header{
+    height: 8vh;
+    max-height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+
+    border: 1px solid #e6e6e6;
+}
+
+.chat_view{
+    height: calc(100vh - 8vh);
+    display: flex;
+}
+
+.matches{
+   flex:3.5;
+   border: 1px solid #e6e6e6;
+}
+.matches_input{
+    width: 90%;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.conversation{
+    flex:8.5;
+    border: 1px solid #e6e6e6;
+}
+
+.matches_wrapper, .conversation_wrapper{
+    padding: 10px;
+    
+    height: 100%;
+}
+
+.conversation-bottom{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chat_textarea{
+    width: 80%;
+    height: 90px;
+    padding: 10px;
+    border: none;
+
+}
+
+
+

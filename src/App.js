@@ -3,8 +3,12 @@ import './App.css';
 import Login from './pages/Login/Login.js';
 import Home from './pages/Home/Home.js';
 import Profile from './pages/profile/profile';
+import ProfileView from './pages/profile_view/profile_view.js';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
+import Setting from './pages/setting/setting.js';
+import EditProfile from './pages/EditProfile/EditProfile.js';
+import Chat from './pages/chat/chat.js';
 
 
 
@@ -51,6 +55,10 @@ function App() {
           <Route path="/" element={user ? <Home user={user} id={id} /> : <Navigate to='login' />} />
           <Route path="/login" element={user ? <Navigate to='/' /> : <Login />} />
           <Route path="/profile" element={user ? <Profile user={user} id={id} /> : <Navigate to='login' />} />
+          <Route path='/profile_view' element={user ? <ProfileView user={user} id={id} /> : <Navigate to='login' />} />
+          <Route path='profile/edit_profile' element={user ? <EditProfile user={user} id={id} /> : <Navigate to='login' />} />
+          <Route path='profile/setting' element={user ? <Setting id={id} /> : <Navigate to='login' />} />
+          <Route path='/chat' element={user ? <Chat id={id} /> : <Navigate to='login' />} />
         </Routes>
       </div>
     </BrowserRouter >

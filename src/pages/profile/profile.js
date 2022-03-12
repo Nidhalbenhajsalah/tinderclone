@@ -11,59 +11,69 @@ import { EditProfile } from '../EditProfile/EditProfile.js';
 const Profile = ({ id }) => {
 
     const [dbUser, setDbUser] = useState(null);
-    const [showEditProfile, setShowEditProfile] = useState(false);
 
     useEffect(() => {
+        let isMounted = false;
         const getDbUser = async () => {
-            const response = await axios.get(`http://localhost:8001/user/findById/${id}`);
+            const response = await axios.post(`http://localhost:8001/user/findById/`, {
+                googleId: id
+            });
+            if (isMounted) return
             setDbUser(response.data);
         }
         getDbUser();
+        return () => {
+            isMounted = true;
+        }
     }, [id])
 
     const firstName = dbUser ? dbUser.firstName : '';
     const image = dbUser ? dbUser.Image : '';
 
 
-    const handleShowEditProfile = () => {
-        setShowEditProfile(!showEditProfile);
-    }
 
     return (
-        !showEditProfile ?
-            <div className='profile'>
 
-                <div className='profile__header'>
-                    <Link to='/'>
-                        <i className="fa-solid fa-chevron-left back"></i>
-                    </Link>
-                </div>
+        <div className='profile'>
+
+            <div className='profile__header'>
+                <Link to='/'>
+                    <i className="fa-solid fa-chevron-left back"></i>
+                </Link>
+            </div>
+            <Link className='Link' to='/profile_view'>
                 <div className='main_avatar'>
+
                     <img src={image} alt='avatar'
                         className='img' />
+
                     <div className='profile__info'>
                         <h1>{firstName}</h1>
                     </div>
+
                 </div>
-                <div className='profile__options'>
-                    <div className='level1'>
+            </Link>
+            <div className='profile__options'>
+                <div className='level1'>
+                    <Link className='Link' to='setting'>
                         <div className='setting'>
                             <IconButton>
                                 <i className="fa-solid fa-gear icon"></i>
                             </IconButton>
                             <span>Setting</span>
                         </div>
+                    </Link>
+                    <Link className='Link' to='edit_profile'>
                         <div className='add__photo'>
-                            <IconButton onClick={handleShowEditProfile}>
+                            <IconButton >
                                 <i className="fa-solid fa-user-pen icon"></i>
                             </IconButton>
                             <span>Edit Profile</span>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </div>
-            :
-            <EditProfile handleShowEditProfile={handleShowEditProfile} dbUser={dbUser} />
+        </div>
 
     );
 }

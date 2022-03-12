@@ -1,0 +1,22 @@
+.match{
+    display:flex;
+    align-items: center;
+    padding:10px;
+    cursor: pointer;
+}
+
+.match:hover{
+    background-color: rgb(250, 249, 249) ;
+}
+
+.match__image{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 2vw;
+}
+
+.match_name{
+    font-weight: 500;
+}

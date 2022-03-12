@@ -1,4 +1,6 @@
-
+.Link{
+    text-decoration: none;
+  }
 
 .profile__header{
     height: 8vh;
