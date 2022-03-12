@@ -15,11 +15,11 @@
 .tinderCards__cardContainer{
     display: flex;
     justify-content: center;
-    margin-top: 10vh;
+    margin-top: 5vh;
 
 }
 .swipe{
-    
+    position: absolute;
 
 }
 
@@ -30,8 +30,8 @@
 
 .card h3 {
     position: absolute;
-    bottom: 0;
-    margin: 3px;
+    bottom: 1vh;
+    margin: 1vh;
     color: #fff;
     font-size: 3em;
 }

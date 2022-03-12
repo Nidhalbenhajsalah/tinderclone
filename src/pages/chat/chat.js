@@ -50,9 +50,11 @@ const Chat = () => {
                                 placeholder='Type a message...'
                             >
                             </textarea>
-                            <IconButton className='chat_send'>
-                                <i className="fa-solid fa-paper-plane"></i>
-                            </IconButton>
+                            <div className='chat_send'>
+                                <IconButton className='icon_send' >
+                                    <i className="fa-solid fa-paper-plane send"></i>
+                                </IconButton>
+                            </div>
                         </div>
 
                     </div>

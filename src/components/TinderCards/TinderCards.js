@@ -9,11 +9,12 @@ function TinderCards() {
 
     useEffect(() => {
         async function fetchData() {
-            const req = await instance.get('/tinder/cards')
-            setPeople(req.data)
-            console.log('req data', req.data);
+            const res = await instance.get('/tinder/cards')
+            setPeople(res.data)
         }
-        fetchData()
+        return () => {
+            fetchData()
+        }
     }, [])
 
 
