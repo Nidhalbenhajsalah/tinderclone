@@ -2,40 +2,60 @@
     display: flex;
     flex-direction: column;
     margin-top: 2vh;
+    margin-left: 2vw;
+    margin-bottom: 2vh;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-right: 20%;
 }
+
+.messageown{
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-bottom: 2vh;
+    margin-right: 1vw;
+    margin-left: 30%;
+    max-width: 65%;
+    width: 100%;
+}
+
 .message_top{
     display:flex;
+    margin-right: 1.5vh;
+    margin-bottom: 1vh;
+    max-width: 100%;
+    width: 100%;
 }
+
 .message_image{
-    width:32px;
-    height:32px;
+    width: 5.5vw;
+    height: 5.5vw;
     border-radius:50%;
     object-fit: cover;
-    margin-right:10px;
+    margin-right:1vw
 }
 
 .message_text{
-    padding: 10px;
-    border-radius: 20px;
-    background-color:rgb(231, 82, 157);;
+    padding: 1vh 0;
+    border-radius: 2vw;
+    background-color:rgb(231, 82, 157);
     color: white;
-    max-width: 300px;
+    font-size: 2.5vh;
+    padding: 1vh;
 }
 
 .message_time{
-    font-size: 12px;
+    font-size: 1vh;
     margin-top: 0.5vh;
     color: #828282;
+    margin-right: 3vw;
+    justify-content: end;
+    margin-left: 7.5vw;
 }
 
-.message.own{
-    align-items: flex-end;
-}
-
-.message.own .message_text{
+.messageown .message_text{
     background-color: rgb(24, 219, 24);
 }
 
-.conversation-bottom{
-    
-}
+
+

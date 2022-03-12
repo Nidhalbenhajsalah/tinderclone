@@ -34,6 +34,15 @@ const Chat = () => {
                             <Message own={true} />
                             <Message />
                             <Message own={true} />
+                            <Message />
+                            <Message own={true} />
+                            <Message />
+                            <Message own={true} />
+                            <Message />
+                            <Message own={true} />
+                            <Message />
+                            <Message own={true} />
+
                         </div>
                         <div className='conversation-bottom'>
                             <textarea
@@ -44,12 +53,13 @@ const Chat = () => {
                             <IconButton className='chat_send'>
                                 <i className="fa-solid fa-paper-plane"></i>
                             </IconButton>
-
                         </div>
+
                     </div>
 
                 </div>
             </div>
+
 
         </>
     )

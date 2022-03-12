@@ -4,7 +4,7 @@ import './message.css'
 
 const Message = ({ own }) => {
     return (
-        <div className={own ? "message own" : "message"}>
+        <div className={own ? "messageown" : "message"}>
             <div className='message_top'>
                 <img
                     className='message_image'
@@ -18,7 +18,6 @@ const Message = ({ own }) => {
             <div className='message_time'>
                 1 hour ago
             </div>
-
         </div>
     )
 }
