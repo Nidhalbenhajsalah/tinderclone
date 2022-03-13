@@ -1,8 +1,10 @@
 import React from "react";
 
+
+
 import './message.css'
 
-const Message = ({ own }) => {
+const Message = ({ message, own }) => {
     return (
         <div className={own ? "messageown" : "message"}>
             <div className='message_top'>
@@ -12,11 +14,11 @@ const Message = ({ own }) => {
                     alt="user"
                 />
                 <p className="message_text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    {message.text}
                 </p>
             </div>
             <div className='message_time'>
-                1 hour ago
+                {message.createdAt}
             </div>
         </div>
     )

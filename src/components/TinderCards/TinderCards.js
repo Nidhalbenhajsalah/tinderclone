@@ -8,18 +8,36 @@ function TinderCards() {
     const [people, setPeople] = useState([])
 
     useEffect(() => {
+        let isMounted = false;
         async function fetchData() {
             const res = await instance.get('/tinder/cards')
+            if (isMounted) return
             setPeople(res.data)
         }
+        fetchData()
         return () => {
-            fetchData()
+            isMounted = true;
         }
+
     }, [])
 
 
     const swiped = (direction, nameToDelete) => {
-        console.log('removing: ' + nameToDelete)
+        if (direction === 'right') {
+            console.log('liked ' + nameToDelete)
+            setPeople(people.filter(person => person.name !== nameToDelete))
+        }
+        else if (direction === 'left') {
+            console.log('removed ' + nameToDelete)
+            setPeople(people.filter(person => person.name !== nameToDelete))
+        }
+        console.log(people);
+        return people;
+
+        // direction === 'right' ? console.log('liked' + nameToDelete) : console.log('nope ' + nameToDelete)
+        // setPeople(people.filter(person => person.name !== nameToDelete))
+        // console.log(people);
+
     }
 
     const outOfFrame = (name) => {

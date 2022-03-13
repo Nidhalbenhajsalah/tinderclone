@@ -58,7 +58,7 @@ function App() {
           <Route path='/profile_view' element={user ? <ProfileView user={user} id={id} /> : <Navigate to='login' />} />
           <Route path='profile/edit_profile' element={user ? <EditProfile user={user} id={id} /> : <Navigate to='login' />} />
           <Route path='profile/setting' element={user ? <Setting id={id} /> : <Navigate to='login' />} />
-          <Route path='/chat' element={user ? <Chat id={id} /> : <Navigate to='login' />} />
+          <Route path='/chat' element={user ? <Chat user={user} id={id} /> : <Navigate to='login' />} />
         </Routes>
       </div>
     </BrowserRouter >

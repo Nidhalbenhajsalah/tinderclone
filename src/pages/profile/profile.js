@@ -3,7 +3,6 @@ import axios from 'axios';
 import { IconButton } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import './profile.css';
-import { EditProfile } from '../EditProfile/EditProfile.js';
 
 
 
