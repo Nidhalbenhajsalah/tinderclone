@@ -1,10 +1,12 @@
 import React from "react";
+import moment from 'moment';
 
 
 
 import './message.css'
 
 const Message = ({ message, own }) => {
+
     return (
         <div className={own ? "messageown" : "message"}>
             <div className='message_top'>
@@ -18,7 +20,7 @@ const Message = ({ message, own }) => {
                 </p>
             </div>
             <div className='message_time'>
-                {message.createdAt}
+                {moment(message.createdAt).fromNow()}
             </div>
         </div>
     )
