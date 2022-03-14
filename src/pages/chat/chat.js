@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { IconButton } from '@material-ui/core';
 import Message from '../../components/conversations/message';
 import Match from '../../components/matches/match';
+import { io } from 'socket.io-client'
 import './chat.css'
 
 
@@ -15,7 +16,37 @@ const Chat = ({ user }) => {
     const [matches, setMatches] = useState([]);
     const [currentMatch, setCurrentMatch] = useState(null);
     const [messages, setMessages] = useState(null);
+    const [newMessage, setNewMessage] = useState('');
+    const [arrivalMessage, setArrivalMessage] = useState(null);
+
     const conversationId = currentMatch?._id;
+
+    const socket = useRef();
+
+    useEffect(() => {
+        socket.current = io(`http://localhost:8900`);
+        socket.current.on("getMessage", data => {
+            setArrivalMessage({
+                senderId: data.senderId,
+                text: data.text,
+                createdAt: Date.now(),
+            });
+        })
+
+    }, [])
+
+    useEffect(() => {
+        arrivalMessage && currentMatch?.members.includes(arrivalMessage.senderId) && setMessages(prev => [...prev, arrivalMessage]);
+    }, [arrivalMessage, currentMatch])
+
+
+    useEffect(() => {
+        socket.current.emit('addUser', user?._id);
+        socket.current.on('getUsers', users => {
+            console.log('users', users);
+        })
+    }, [user])
+
 
 
     useEffect(() => {
@@ -49,6 +80,35 @@ const Chat = ({ user }) => {
 
     }, [conversationId]);
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const message = {
+            sender: user?._id,
+            text: newMessage,
+            conversationId: currentMatch?._id
+        }
+
+        const receiverId = currentMatch?.members.find(
+            member => member !== user._id
+        )
+
+        socket.current.emit('sendMessage', {
+            senderId: user._id,
+            receiverId: receiverId,
+            text: newMessage,
+        })
+        try {
+            const response = await axios.post(`http://localhost:8001/chat/createMessage`, message)
+            setMessages([...messages, response.data]);
+            setNewMessage('');
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+
+
 
 
 
@@ -63,13 +123,11 @@ const Chat = ({ user }) => {
             <div className='chat_view'>
                 <div className='matches'>
                     <div className='matches_wrapper'>
-                        {/* <input placeholder='Seach for matches...' type='text' className='matches_input' /> */}
-                        {matches.map(match => (
+                        {matches?.map(match => (
                             <div onClick={() => setCurrentMatch(match)}>
                                 <Match key={match._id} match={match} userId={userId} />
                             </div>
                         ))}
-
                     </div>
 
                 </div>
@@ -79,18 +137,21 @@ const Chat = ({ user }) => {
                             <>
                                 <div className='conversation_top'>
                                     {messages?.map(message => (
-                                        <Message message={message} own={message.senderId === userId} />
-
+                                        <div key={message._id} >
+                                            <Message message={message} own={message.senderId === userId} />
+                                        </div>
                                     ))}
                                 </div>
                                 <div className='conversation-bottom'>
                                     <textarea
                                         className='chat_textarea'
                                         placeholder='Type a message...'
+                                        value={newMessage}
+                                        onChange={(e) => setNewMessage(e.target.value)}
                                     >
                                     </textarea>
                                     <div className='chat_send'>
-                                        <IconButton className='icon_send' >
+                                        <IconButton className='icon_send' onClick={handleSubmit}>
                                             <i className="fa-solid fa-paper-plane send"></i>
                                         </IconButton>
                                     </div>
