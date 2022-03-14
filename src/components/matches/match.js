@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import './match.css';
 
-function Match({ match, userId }) {
+function Match({ match, userId, onlineUsers }) {
 
     const [crush, setCrush] = useState({});
     useEffect(() => {
@@ -23,14 +23,17 @@ function Match({ match, userId }) {
 
 
 
-
-
     return (
         <div className='match'>
             <div className='image_container'>
                 <img className='match__image' src={crush.Image} alt='match' />
             </div>
-            <div className='online_badge'></div>
+            {onlineUsers.map(onlineUser =>
+                onlineUser.userId === crush._id ?
+                    <div className='online_badge'></div>
+                    :
+                    null
+            )}
             <div className='match__info'>
                 <span className='match_name'>{crush.firstName}</span>
             </div>

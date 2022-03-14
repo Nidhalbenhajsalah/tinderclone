@@ -18,6 +18,7 @@ const Chat = ({ user }) => {
     const [messages, setMessages] = useState(null);
     const [newMessage, setNewMessage] = useState('');
     const [arrivalMessage, setArrivalMessage] = useState(null);
+    const [onlineUsers, setOnlineUsers] = useState([]);
 
     const conversationId = currentMatch?._id;
 
@@ -43,7 +44,7 @@ const Chat = ({ user }) => {
     useEffect(() => {
         socket.current.emit('addUser', user?._id);
         socket.current.on('getUsers', users => {
-            console.log('users', users);
+            setOnlineUsers(users);
         })
     }, [user])
 
@@ -83,7 +84,7 @@ const Chat = ({ user }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const message = {
-            sender: user?._id,
+            senderId: user?._id,
             text: newMessage,
             conversationId: currentMatch?._id
         }
@@ -125,7 +126,7 @@ const Chat = ({ user }) => {
                     <div className='matches_wrapper'>
                         {matches?.map(match => (
                             <div onClick={() => setCurrentMatch(match)}>
-                                <Match key={match._id} match={match} userId={userId} />
+                                <Match key={match._id} match={match} userId={userId} onlineUsers={onlineUsers} />
                             </div>
                         ))}
                     </div>
@@ -138,7 +139,7 @@ const Chat = ({ user }) => {
                                 <div className='conversation_top'>
                                     {messages?.map(message => (
                                         <div key={message._id} >
-                                            <Message message={message} own={message.senderId === userId} />
+                                            <Message message={message} own={message.senderId === user._id} userId={userId} />
                                         </div>
                                     ))}
                                 </div>
