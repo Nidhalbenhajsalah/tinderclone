@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { IconButton } from '@material-ui/core';
 import './profile_view.css'
+import instance from '../../axios'
 
 
 const Profile_view = ({ id }) => {
@@ -10,7 +10,7 @@ const Profile_view = ({ id }) => {
     const [index, setIndex] = useState(0)
 
     const fetchPhotos = async () => {
-        const response = await axios.post(`https://nidhal-tinder-backend.herokuapp.com/user/getPhotos`, {
+        const response = await instance.post(`/user/getPhotos`, {
             googleId: id
         })
         setPhotos(response.data.photos.filter(photo => photo.url !== ''))

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import moment from 'moment';
+import instance from '../../axios'
 
 
 
@@ -11,7 +11,7 @@ const Message = ({ message, own }) => {
 
     useEffect(() => {
         const getSenderObj = async () => {
-            const response = await axios.post(`https://nidhal-tinder-backend.herokuapp.com/user/findByUserId`, {
+            const response = await instance.post(`/user/findByUserId`, {
                 userId: message.senderId
             });
 

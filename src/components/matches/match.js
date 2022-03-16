@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
 import './match.css';
+import instance from '../../axios'
 
 function Match({ match, userId, onlineUsers }) {
 
@@ -9,7 +9,7 @@ function Match({ match, userId, onlineUsers }) {
         let isMounted = false;
         const matchId = match?.members.filter(member => member !== userId);
         const getMatch = async () => {
-            const response = await axios.post('https://nidhal-tinder-backend.herokuapp.com/user/findByUserId', { userId: matchId });
+            const response = await instance.post('/user/findByUserId', { userId: matchId });
             if (isMounted) return
             setCrush(response.data.user);
 

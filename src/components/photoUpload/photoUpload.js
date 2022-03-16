@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { IconButton } from '@material-ui/core';
-import axios from 'axios';
 import './photoUpload.css'
+import instance from '../../axios'
 
 const PhotoUpload = ({ googleId, index }) => {
 
@@ -16,7 +16,7 @@ const PhotoUpload = ({ googleId, index }) => {
 
     const uploadImage = async (base64EncodedImage) => {
         try {
-            await axios.post(`https://nidhal-tinder-backend.herokuapp.com/user/upload`, {
+            await instance.post(`/user/upload`, {
                 data: base64EncodedImage,
                 googleId: googleId,
                 index: index

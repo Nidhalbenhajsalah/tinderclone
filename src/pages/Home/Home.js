@@ -4,7 +4,7 @@ import TinderCards from '../../components/TinderCards/TinderCards'
 import SwipeButtons from '../../components/Swipe-buttons/SwipeButtons'
 
 
-const Home = ({ id }) => {
+const Home = () => {
 
 
 

@@ -1,12 +1,12 @@
 import React from 'react'
 import { IconButton } from '@material-ui/core';
-import axios from 'axios';
+import instance from '../../axios'
 
 const PhotoDelete = ({ googleId, index }) => {
 
     const handleDelete = async () => {
         try {
-            await axios.post(`https://nidhal-tinder-backend.herokuapp.com/user/deletePhoto`, {
+            await instance.post(`/user/deletePhoto`, {
                 googleId: googleId,
                 index: index
             });

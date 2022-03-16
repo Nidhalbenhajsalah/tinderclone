@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import PhotoDelete from '../../components/photoDelete/photoDelete';
 import PhotoUpload from '../../components/photoUpload/photoUpload';
+import instance from '../../axios'
 
 import './EditProfile.css'
 
@@ -21,7 +21,7 @@ export const EditProfile = ({ id }) => {
         let isMounted = false;
         const getUserPhotos = async () => {
             try {
-                const response = await axios.post(`https://nidhal-tinder-backend.herokuapp.com/user/getPhotos`, {
+                const response = await instance.post(`/user/getPhotos`, {
                     googleId: googleId
                 });
                 if (isMounted) return

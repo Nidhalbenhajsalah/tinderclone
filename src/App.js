@@ -14,6 +14,7 @@ import Chat from './pages/chat/chat.js';
 
 
 
+
 function App() {
   const [user, setUser] = useState(null);
   const [id, setId] = useState(null);
@@ -43,7 +44,6 @@ function App() {
     }
     getUser();
   }, []);
-  console.log('user from App.js', user);
 
 
 

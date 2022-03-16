@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+
 import { IconButton } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import './profile.css';
+import instance from '../../axios'
 
 
 
@@ -14,7 +15,7 @@ const Profile = ({ id }) => {
     useEffect(() => {
         let isMounted = false;
         const getDbUser = async () => {
-            const response = await axios.post(`https://nidhal-tinder-backend.herokuapp.com/user/findById/`, {
+            const response = await instance.post(`/user/findById/`, {
                 googleId: id
             });
             if (isMounted) return

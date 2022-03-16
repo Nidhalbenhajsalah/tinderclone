@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { IconButton } from '@material-ui/core';
 import Message from '../../components/conversations/message';
 import Match from '../../components/matches/match';
 import { io } from 'socket.io-client'
+import instance from '../../axios'
 import './chat.css'
 
 
@@ -25,7 +25,7 @@ const Chat = ({ user }) => {
     const socket = useRef();
 
     useEffect(() => {
-        socket.current = io(`https://shanysocket.herokuapp.com/`);
+        socket.current = io(`http://localhost:8900`);
         socket.current.on("getMessage", data => {
             setArrivalMessage({
                 senderId: data.senderId,
@@ -53,7 +53,7 @@ const Chat = ({ user }) => {
     useEffect(() => {
         let isMounted = false;
         const getMatches = async () => {
-            const response = await axios.post(`https://nidhal-tinder-backend.herokuapp.com/chat/getAllconversations`, {
+            const response = await instance.post(`/chat/getAllconversations`, {
                 userId: userId
             });
             if (isMounted) return
@@ -68,7 +68,7 @@ const Chat = ({ user }) => {
     useEffect(() => {
         let isMounted = false;
         const getMessages = async () => {
-            const response = await axios.post(`https://nidhal-tinder-backend.herokuapp.com/chat/getAllMessages`, {
+            const response = await instance.post(`/chat/getAllMessages`, {
                 conversationId: conversationId
             });
             if (isMounted) return
@@ -99,7 +99,7 @@ const Chat = ({ user }) => {
             text: newMessage,
         })
         try {
-            const response = await axios.post(`https://nidhal-tinder-backend.herokuapp.com/chat/createMessage`, message)
+            const response = await instance.post(`/chat/createMessage`, message)
             setMessages([...messages, response.data]);
             setNewMessage('');
         } catch (error) {
