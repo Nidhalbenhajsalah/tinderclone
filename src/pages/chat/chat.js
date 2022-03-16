@@ -25,7 +25,7 @@ const Chat = ({ user }) => {
     const socket = useRef();
 
     useEffect(() => {
-        socket.current = io(`http://localhost:8900`);
+        socket.current = io(`https://shanysocket.herokuapp.com/`);
         socket.current.on("getMessage", data => {
             setArrivalMessage({
                 senderId: data.senderId,
