@@ -21,7 +21,7 @@ export const EditProfile = ({ id }) => {
         let isMounted = false;
         const getUserPhotos = async () => {
             try {
-                const response = await axios.post(`http://localhost:8001/user/getPhotos`, {
+                const response = await axios.post(`https://nidhal-tinder-backend.herokuapp.com/user/getPhotos`, {
                     googleId: googleId
                 });
                 if (isMounted) return

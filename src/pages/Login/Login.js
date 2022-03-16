@@ -4,7 +4,7 @@ import './Login.css'
 const Login = () => {
 
     const google = () => {
-        window.open('http://localhost:8001/auth/google', '_self')
+        window.open('https://nidhal-tinder-backend.herokuapp.com/auth/google', '_self')
     }
     return (
         <div className='login'>

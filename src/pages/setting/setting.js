@@ -6,7 +6,7 @@ import './setting.css'
 const Setting = () => {
 
     const logout = () => {
-        window.open('http://localhost:8001/auth/logout', '_self');
+        window.open('https://nidhal-tinder-backend.herokuapp.com/auth/logout', '_self');
     }
 
     return (

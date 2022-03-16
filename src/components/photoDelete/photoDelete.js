@@ -6,7 +6,7 @@ const PhotoDelete = ({ googleId, index }) => {
 
     const handleDelete = async () => {
         try {
-            await axios.post(`http://localhost:8001/user/deletePhoto`, {
+            await axios.post(`https://nidhal-tinder-backend.herokuapp.com/user/deletePhoto`, {
                 googleId: googleId,
                 index: index
             });

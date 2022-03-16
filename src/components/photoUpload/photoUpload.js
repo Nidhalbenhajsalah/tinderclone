@@ -16,7 +16,7 @@ const PhotoUpload = ({ googleId, index }) => {
 
     const uploadImage = async (base64EncodedImage) => {
         try {
-            await axios.post(`http://localhost:8001/user/upload`, {
+            await axios.post(`https://nidhal-tinder-backend.herokuapp.com/user/upload`, {
                 data: base64EncodedImage,
                 googleId: googleId,
                 index: index

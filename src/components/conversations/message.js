@@ -11,7 +11,7 @@ const Message = ({ message, own }) => {
 
     useEffect(() => {
         const getSenderObj = async () => {
-            const response = await axios.post(`http://localhost:8001/user/findByUserId`, {
+            const response = await axios.post(`https://nidhal-tinder-backend.herokuapp.com/user/findByUserId`, {
                 userId: message.senderId
             });
 

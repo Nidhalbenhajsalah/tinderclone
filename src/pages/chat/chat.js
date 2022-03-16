@@ -53,7 +53,7 @@ const Chat = ({ user }) => {
     useEffect(() => {
         let isMounted = false;
         const getMatches = async () => {
-            const response = await axios.post(`http://localhost:8001/chat/getAllconversations`, {
+            const response = await axios.post(`https://nidhal-tinder-backend.herokuapp.com/chat/getAllconversations`, {
                 userId: userId
             });
             if (isMounted) return
@@ -68,7 +68,7 @@ const Chat = ({ user }) => {
     useEffect(() => {
         let isMounted = false;
         const getMessages = async () => {
-            const response = await axios.post(`http://localhost:8001/chat/getAllMessages`, {
+            const response = await axios.post(`https://nidhal-tinder-backend.herokuapp.com/chat/getAllMessages`, {
                 conversationId: conversationId
             });
             if (isMounted) return
@@ -99,7 +99,7 @@ const Chat = ({ user }) => {
             text: newMessage,
         })
         try {
-            const response = await axios.post(`http://localhost:8001/chat/createMessage`, message)
+            const response = await axios.post(`https://nidhal-tinder-backend.herokuapp.com/chat/createMessage`, message)
             setMessages([...messages, response.data]);
             setNewMessage('');
         } catch (error) {

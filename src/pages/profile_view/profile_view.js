@@ -10,7 +10,7 @@ const Profile_view = ({ id }) => {
     const [index, setIndex] = useState(0)
 
     const fetchPhotos = async () => {
-        const response = await axios.post(`http://localhost:8001/user/getPhotos`, {
+        const response = await axios.post(`https://nidhal-tinder-backend.herokuapp.com/user/getPhotos`, {
             googleId: id
         })
         setPhotos(response.data.photos.filter(photo => photo.url !== ''))

@@ -14,7 +14,7 @@ const Profile = ({ id }) => {
     useEffect(() => {
         let isMounted = false;
         const getDbUser = async () => {
-            const response = await axios.post(`http://localhost:8001/user/findById/`, {
+            const response = await axios.post(`https://nidhal-tinder-backend.herokuapp.com/user/findById/`, {
                 googleId: id
             });
             if (isMounted) return
