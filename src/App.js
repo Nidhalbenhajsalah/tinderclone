@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     const getUser = async () => {
-      fetch('https://nidhal-tinder-backend.herokuapp.com/auth/login/sucess', {
+      fetch('http://localhost:8001/auth/login/sucess', {
         method: 'GET',
         credentials: 'include',
         headers: {

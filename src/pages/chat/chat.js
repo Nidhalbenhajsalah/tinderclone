@@ -6,6 +6,7 @@ import Match from '../../components/matches/match';
 import { io } from 'socket.io-client'
 import instance from '../../axios'
 import './chat.css'
+import MatchProfile from '../matchProfile/matchProfile';
 
 
 const Chat = ({ user }) => {
@@ -19,20 +20,27 @@ const Chat = ({ user }) => {
     const [newMessage, setNewMessage] = useState('');
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
+    const [showMatchProfile, setShowMatchProfile] = useState(false);
+    const [matchId, setMatchId] = useState(null);
 
     const conversationId = currentMatch?._id;
 
     const socket = useRef();
 
     useEffect(() => {
+        let isMounted = false;
         socket.current = io(`http://localhost:8900`);
         socket.current.on("getMessage", data => {
+            if (isMounted) return
             setArrivalMessage({
                 senderId: data.senderId,
                 text: data.text,
                 createdAt: Date.now(),
             });
         })
+        return () => {
+            isMounted = true;
+        }
 
     }, [])
 
@@ -42,10 +50,16 @@ const Chat = ({ user }) => {
 
 
     useEffect(() => {
+        let isMounted = false;
         socket.current.emit('addUser', user?._id);
         socket.current.on('getUsers', users => {
+            if (isMounted) return;
             setOnlineUsers(users);
         })
+        return () => {
+            isMounted = true;
+            socket.current.emit('removeUser', user?._id);
+        }
     }, [user])
 
 
@@ -113,60 +127,69 @@ const Chat = ({ user }) => {
 
 
 
-
     return (
         <>
-            <div className='chat__header'>
-                <Link to='/'>
-                    <i className="fa-solid fa-chevron-left back"></i>
-                </Link>
-            </div>
-            <div className='chat_view'>
-                <div className='matches'>
-                    <div className='matches_wrapper'>
-                        {matches?.map(match => (
-                            <div onClick={() => setCurrentMatch(match)}>
-                                <Match key={match._id} match={match} userId={userId} onlineUsers={onlineUsers} />
-                            </div>
-                        ))}
+            {!showMatchProfile ?
+                <>
+                    <div className='chat__header'>
+                        <Link to='/'>
+                            <i className="fa-solid fa-chevron-left back"></i>
+                        </Link>
                     </div>
+                    <div className='chat_view'>
+                        <div className='matches'>
+                            <div className='matches_wrapper'>
+                                {matches?.map(match => (
 
-                </div>
-                <div className='conversation'>
-                    <div className='conversation_wrapper'>
-                        {currentMatch ?
-                            <>
-                                <div className='conversation_top'>
-                                    {messages?.map(message => (
-                                        <div key={message._id} >
-                                            <Message message={message} own={message.senderId === user._id} userId={userId} />
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className='conversation-bottom'>
-                                    <textarea
-                                        className='chat_textarea'
-                                        placeholder='Type a message...'
-                                        value={newMessage}
-                                        onChange={(e) => setNewMessage(e.target.value)}
-                                    >
-                                    </textarea>
-                                    <div className='chat_send'>
-                                        <IconButton className='icon_send' onClick={handleSubmit}>
-                                            <i className="fa-solid fa-paper-plane send"></i>
-                                        </IconButton>
+                                    <div key={match._id} onClick={() => setCurrentMatch(match)}>
+                                        <Match match={match} userId={userId} onlineUsers={onlineUsers} />
                                     </div>
-                                </div>
-                            </>
-                            :
-                            <span className='No_conversation_text'>Open a conversation</span>
-                        }
+                                ))}
+                            </div>
+                        </div>
+                        <div className='conversation'>
+                            <div className='conversation_wrapper'>
+                                {currentMatch ?
+                                    <>
+                                        <div className='conversation_top'>
+                                            {messages?.map(message => (
+                                                <div key={message._id} >
+                                                    <Message message={message}
+                                                        own={message.senderId === user._id}
+                                                        userId={userId}
+                                                        setShowMatchProfile={setShowMatchProfile}
+                                                        showMatchProfile={showMatchProfile}
+                                                        setMatchId={setMatchId}
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <div className='conversation-bottom'>
+                                            <textarea
+                                                className='chat_textarea'
+                                                placeholder='Type a message...'
+                                                value={newMessage}
+                                                onChange={(e) => setNewMessage(e.target.value)}
+                                            >
+                                            </textarea>
+                                            <div className='chat_send'>
+                                                <IconButton className='icon_send' onClick={handleSubmit}>
+                                                    <i className="fa-solid fa-paper-plane send"></i>
+                                                </IconButton>
+                                            </div>
+                                        </div>
+                                    </>
+                                    :
+                                    <span className='No_conversation_text'>Open a conversation</span>
+                                }
+                            </div>
+                        </div>
                     </div>
+                </>
+                :
+                <MatchProfile setShowMatchProfile={setShowMatchProfile} showMatchProfile={showMatchProfile} matchId={matchId} />
 
-                </div>
-            </div>
-
-
+            }
         </>
     )
 }

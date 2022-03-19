@@ -10,7 +10,7 @@ function TinderCards() {
     useEffect(() => {
         let isMounted = false;
         async function fetchData() {
-            const res = await instance.get('/tinder/cards')
+            const res = await instance.get('user/findAll')
             if (isMounted) return
             setPeople(res.data)
         }
@@ -18,21 +18,19 @@ function TinderCards() {
         return () => {
             isMounted = true;
         }
-
     }, [])
 
 
-    const swiped = (direction, nameToDelete) => {
+    const swiped = (direction, IdToDelete) => {
         if (direction === 'right') {
-            console.log('liked ' + nameToDelete)
-            setPeople(people.filter(person => person.name !== nameToDelete))
+            console.log('liked ' + IdToDelete)
+            setPeople(people.filter(person => person._id !== IdToDelete))
+
         }
         else if (direction === 'left') {
-            console.log('removed ' + nameToDelete)
-            setPeople(people.filter(person => person.name !== nameToDelete))
+            console.log('removed ' + IdToDelete)
+            setPeople(people.filter(person => person._id !== IdToDelete))
         }
-        console.log(people);
-        return people;
 
         // direction === 'right' ? console.log('liked' + nameToDelete) : console.log('nope ' + nameToDelete)
         // setPeople(people.filter(person => person.name !== nameToDelete))
@@ -40,35 +38,38 @@ function TinderCards() {
 
     }
 
-    const outOfFrame = (name) => {
-        console.log(name + ' left the screen!')
+    const outOfFrame = (id) => {
+        console.log(id + ' left the screen!')
     }
+
+
 
 
 
     return (
         <div className='tinderCards'>
-            <div className='tinderCards__cardContainer'>
+
+            <div className='tinderCards__cardContainer'
+            >
                 {
                     people.map(person => (
                         <TinderCard
                             className='swipe'
-                            key={person.name}
+                            key={person._id}
                             preventSwipe={['up', 'down']}
-                            onSwipe={(dir) => swiped(dir, person.name)}
-                            onCardLeftScreen={() => outOfFrame(person.name)}
+                            onSwipe={(dir) => swiped(dir, person._id)}
+                            onCardLeftScreen={() => outOfFrame(person._id)}
                         >
                             <div
-                                style={{ backgroundImage: `url(${person.imgUrl})` }}
+                                style={{ backgroundImage: `url(${person.Image})` }}
                                 className='card'
                             >
-                                <h3>{person.name}</h3>
+                                <h3>{person.firstName}</h3>
                             </div>
                         </TinderCard>
                     ))
                 }
             </div>
-
         </div>
     )
 }

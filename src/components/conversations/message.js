@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import moment from 'moment';
 import instance from '../../axios'
+import { Link } from "react-router-dom";
 
 
 
 import './message.css'
 
-const Message = ({ message, own }) => {
+const Message = ({ message, own, setShowMatchProfile, showMatchProfile, setMatchId }) => {
     const [senderObj, setSenderObj] = useState(null);
 
     useEffect(() => {
@@ -21,6 +22,11 @@ const Message = ({ message, own }) => {
 
     }, [])
 
+    const handleAvatarClick = () => {
+        setShowMatchProfile(!showMatchProfile);
+        setMatchId(message.senderId);
+    }
+
 
     return (
         <div className={own ? "messageown" : "message"}>
@@ -29,6 +35,7 @@ const Message = ({ message, own }) => {
                     className='message_image'
                     src={senderObj?.Image}
                     alt="user"
+                    onClick={handleAvatarClick}
                 />
                 <p className="message_text">
                     {message.text}

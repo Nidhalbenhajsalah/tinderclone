@@ -1,0 +1,20 @@
+.profile_view_info{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    
+}
+
+.match_infos{
+    font-weight: bolder;
+    font-size: 2vh;
+    margin-top: 2vh;
+
+
+}

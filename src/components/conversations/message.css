@@ -25,6 +25,7 @@
     margin-bottom: 1vh;
     max-width: 100%;
     width: 100%;
+    align-items: center;
 }
 
 .message_image{
@@ -42,6 +43,7 @@
     color: white;
     font-size: 2vh;
     padding: 1vh;
+    font-weight: 500;
 }
 
 .message_time{
