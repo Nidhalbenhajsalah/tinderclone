@@ -2,7 +2,7 @@ import React from 'react'
 import './swipebuttons.css'
 import { IconButton } from '@material-ui/core';
 
-function SwipeButtons() {
+function SwipeButtons({ people, swiped, outOfFrame, handleLikeButton, handleDislikeButton }) {
     return (
         <div
             className="swipeButtons"
@@ -10,7 +10,7 @@ function SwipeButtons() {
             <IconButton className='iconbutton' >
                 <i className="fa-solid fa-rotate-left" id='swipeButtons__repeat'></i>
             </IconButton>
-            <IconButton >
+            <IconButton onClick={handleDislikeButton} >
                 <i className="fa-solid fa-x"
                     id='swipeButtons__left'></i>
             </IconButton>
@@ -18,9 +18,10 @@ function SwipeButtons() {
                 <i className="fa-solid fa-star"
                     id='swipeButtons__star'></i>
             </IconButton>
-            <IconButton >
+            <IconButton onClick={handleLikeButton}>
                 <i className="fa-solid fa-heart"
-                    id='swipeButtons__heart'></i>
+                    id='swipeButtons__heart'
+                ></i>
             </IconButton>
             <IconButton >
                 <i className="fa-solid fa-bolt-lightning"
